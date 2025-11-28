@@ -44,9 +44,7 @@ module VoiceNotes
     def request(method, path, data = {})
       uri = URI.join(base_url, path)
 
-      if method == :get && !data.empty?
-        uri.query = URI.encode_www_form(data)
-      end
+      uri.query = URI.encode_www_form(data) if method == :get && !data.empty?
 
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = uri.scheme == "https"
@@ -71,9 +69,7 @@ module VoiceNotes
       request["Content-Type"] = "application/json"
       request["Accept"] = "application/vnd.api+json"
 
-      if %i[post put].include?(method) && !data.empty?
-        request.body = JSON.generate(data)
-      end
+      request.body = JSON.generate(data) if %i[post put].include?(method) && !data.empty?
 
       request
     end

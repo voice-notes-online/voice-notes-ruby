@@ -9,10 +9,10 @@ module VoiceNotes
       # @return [Hash] Response containing access_token and refresh_token
       def login(email:, password:)
         post("/api/v1/auth/login", {
-          email: email,
-          password: password,
-          grant_type: "password"
-        })
+               email: email,
+               password: password,
+               grant_type: "password"
+             })
       end
 
       # Refresh access token using refresh token
@@ -20,9 +20,9 @@ module VoiceNotes
       # @return [Hash] Response containing new access_token and refresh_token
       def refresh(refresh_token:)
         post("/api/v1/auth/login", {
-          grant_type: "refresh_token",
-          refresh_token: refresh_token
-        })
+               grant_type: "refresh_token",
+               refresh_token: refresh_token
+             })
       end
 
       # Logout and invalidate the current session
