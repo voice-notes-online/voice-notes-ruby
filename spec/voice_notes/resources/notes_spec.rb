@@ -6,7 +6,7 @@ RSpec.describe VoiceNotes::Resources::Notes do
 
   describe "#find" do
     it "retrieves a note by short ID" do
-      stub_request(:get, "https://api.voice-notes.online/api/v1/notes/abc123")
+      stub_request(:get, "https://voice-notes.online/api/v1/notes/abc123")
         .to_return(
           status: 200,
           body: {
@@ -22,7 +22,7 @@ RSpec.describe VoiceNotes::Resources::Notes do
                 updated_at: "2024-01-15T10:30:00Z"
               },
               links: {
-                self: "https://api.voice-notes.online/api/v1/notes/abc123"
+                self: "https://voice-notes.online/api/v1/notes/abc123"
               }
             }
           }.to_json,
@@ -38,7 +38,7 @@ RSpec.describe VoiceNotes::Resources::Notes do
     end
 
     it "raises NotFoundError when note does not exist" do
-      stub_request(:get, "https://api.voice-notes.online/api/v1/notes/nonexistent")
+      stub_request(:get, "https://voice-notes.online/api/v1/notes/nonexistent")
         .to_return(
           status: 404,
           body: {

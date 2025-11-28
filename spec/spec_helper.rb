@@ -23,7 +23,7 @@ RSpec.configure do |config|
     VoiceNotes.reset!
     VoiceNotes.configure do |c|
       c.api_key = "test_api_key"
-      c.base_url = "https://api.voice-notes.online"
+      c.base_url = "https://voice-notes.online"
     end
   end
 end

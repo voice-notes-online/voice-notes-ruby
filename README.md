@@ -27,7 +27,7 @@ gem install voice-notes-ruby
 ```ruby
 VoiceNotes.configure do |config|
   config.api_key = "your_access_token"
-  config.base_url = "https://api.voice-notes.online"  # optional, this is the default
+  config.base_url = "https://voice-notes.online"  # optional, this is the default
   config.timeout = 30  # optional, in seconds
 end
 ```

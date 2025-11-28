@@ -6,7 +6,7 @@ RSpec.describe VoiceNotes::Resources::Auth do
 
   describe "#login" do
     it "sends login request with email and password" do
-      stub_request(:post, "https://api.voice-notes.online/api/v1/auth/login")
+      stub_request(:post, "https://voice-notes.online/api/v1/auth/login")
         .with(
           body: { email: "user@example.com", password: "password123", grant_type: "password" }.to_json,
           headers: { "Content-Type" => "application/json" }
@@ -28,7 +28,7 @@ RSpec.describe VoiceNotes::Resources::Auth do
     end
 
     it "raises AuthenticationError on invalid credentials" do
-      stub_request(:post, "https://api.voice-notes.online/api/v1/auth/login")
+      stub_request(:post, "https://voice-notes.online/api/v1/auth/login")
         .to_return(status: 401, body: { errors: [{ detail: "Invalid credentials" }] }.to_json)
 
       expect { auth.login(email: "bad@example.com", password: "wrong") }
@@ -38,7 +38,7 @@ RSpec.describe VoiceNotes::Resources::Auth do
 
   describe "#refresh" do
     it "sends refresh request with refresh token" do
-      stub_request(:post, "https://api.voice-notes.online/api/v1/auth/login")
+      stub_request(:post, "https://voice-notes.online/api/v1/auth/login")
         .with(
           body: { grant_type: "refresh_token", refresh_token: "refresh_token_456" }.to_json
         )
@@ -60,7 +60,7 @@ RSpec.describe VoiceNotes::Resources::Auth do
 
   describe "#logout" do
     it "sends logout request" do
-      stub_request(:delete, "https://api.voice-notes.online/api/v1/auth/logout")
+      stub_request(:delete, "https://voice-notes.online/api/v1/auth/logout")
         .to_return(status: 204, body: "")
 
       expect { auth.logout }.not_to raise_error
@@ -69,7 +69,7 @@ RSpec.describe VoiceNotes::Resources::Auth do
 
   describe "#me" do
     it "returns current user data" do
-      stub_request(:get, "https://api.voice-notes.online/api/v1/me")
+      stub_request(:get, "https://voice-notes.online/api/v1/me")
         .to_return(
           status: 200,
           body: {
@@ -92,7 +92,7 @@ RSpec.describe VoiceNotes::Resources::Auth do
     end
 
     it "raises AuthenticationError when not logged in" do
-      stub_request(:get, "https://api.voice-notes.online/api/v1/me")
+      stub_request(:get, "https://voice-notes.online/api/v1/me")
         .to_return(status: 401, body: { errors: [{ detail: "User is not logged in" }] }.to_json)
 
       expect { auth.me }.to raise_error(VoiceNotes::AuthenticationError)
